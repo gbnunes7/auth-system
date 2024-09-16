@@ -1,11 +1,14 @@
 import Button from "../../components/button";
+import Card from "../../components/card";
+import ContainerForm from "../../components/containerForm";
+import ContainerImg from "../../components/containerImg";
 import Input from "../../components/input";
 import Title from "../../components/title";
 
 const Login = () => {
 	return (
-		<div className="h-[700px] w-4/5 bg-[#E5E5E5] shadow-xl shadow-[#B0B0B0] flex">
-			<div className="w-2/4 flex flex-col justify-center items-center">
+		<Card>
+			<ContainerForm>
 				<div className="h-0 bottom-[180px] right-[125px] relative">
 					<img
 						src="./authLogo.png"
@@ -25,16 +28,21 @@ const Login = () => {
 									Recover Password
 								</a>
 								<p className="text-sm">
-									Dont have an account? <a href="#" className="text-blue-500">Sign Up!</a>
+									Dont have an account?
+									<a href="#" className="text-blue-500">
+										Sign Up!
+									</a>
 								</p>
 							</div>
 						</div>
-						<Button type="submit">Login</Button>
+						<Button bgColor="transparent" fontColor="5A5A5A" type="submit">
+							Login
+						</Button>
 					</form>
 				</div>
-			</div>
-			<div className="w-3/4 bg-center bg-contain bg-cover bg-[url('./auth.png')]"></div>
-		</div>
+			</ContainerForm>
+			<ContainerImg bgUrl="./auth.png" />
+		</Card>
 	);
 };
 
