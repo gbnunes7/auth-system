@@ -23,8 +23,8 @@ const Login = () => {
 						<p className="text-lg">Login into your account</p>
 						<form>
 							<div className="flex flex-col gap-4 my-8">
-								<Input placeholder="Email" type="text" />
-								<Input placeholder="Password" type="password" />
+								<Input placeholder="Email" type="text" value="oi" />
+								<Input placeholder="Password" type="password" value="oi" />
 								<div className="flex justify-between">
 									<a href="" className="text-red-500 text-sm w-2/6">
 										Recover Password
