@@ -5,12 +5,14 @@ const Input = ({
 	onChange,
 	pattern,
 	required,
+	autoComplete,
 }: {
 	placeholder: string;
 	type: string;
 	value: string;
 	pattern?: string;
 	required?: boolean;
+	autoComplete?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
 	return (
@@ -21,7 +23,8 @@ const Input = ({
 			value={value}
 			pattern={pattern}
 			onChange={onChange}
-			required = {required}
+			required={required}
+			autoComplete={autoComplete}
 		/>
 	);
 };

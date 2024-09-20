@@ -5,8 +5,11 @@ import ContainerForm from "../../components/containerForm";
 import ContainerImg from "../../components/containerImg";
 import Input from "../../components/input";
 import Title from "../../components/title";
+import useForm from "../../hooks/useFormContext";
 
 const Login = () => {
+	const { email, password, setEmail, setPassword } = useForm();
+
 	return (
 		<div className="min-h-screen min-w-screen flex justify-center items-center">
 			<Card>
@@ -23,15 +26,30 @@ const Login = () => {
 						<p className="text-lg">Login into your account</p>
 						<form>
 							<div className="flex flex-col gap-4 my-8">
-								<Input placeholder="Email" type="text" value="oi" />
-								<Input placeholder="Password" type="password" value="oi" />
+								<Input
+									placeholder="Email"
+									type="text"
+									value={email}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+										setEmail(event.target.value)
+									}
+								/>
+								<Input
+									placeholder="Password"
+									type="password"
+									autoComplete="off"
+									value={password}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+										setPassword(event.target.value)
+									}
+								/>
 								<div className="flex justify-between">
 									<a href="" className="text-red-500 text-sm w-2/6">
 										Recover Password
 									</a>
 									<p className="text-sm">
 										Dont have an account? <span> </span>
-										<Link to={'/signup'} className="text-blue-500">
+										<Link to={"/signup"} className="text-blue-500">
 											Sign Up!
 										</Link>
 									</p>

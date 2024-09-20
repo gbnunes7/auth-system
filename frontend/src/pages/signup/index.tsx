@@ -55,6 +55,7 @@ const Signup = () => {
 									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 										setPassword(event.target.value)
 									}
+									autoComplete="off"
 									required
 								/>
 								<Input
