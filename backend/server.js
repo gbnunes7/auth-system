@@ -1,9 +1,8 @@
-import express from "express"
+import "dotenv/config"
+import { app } from "./src/app.js";
 
-const app = express()
-
-const PORT = 8080
+const PORT = 8080;
 
 app.listen(PORT, () => {
-    console.log(`Listening on port: ${PORT}`)
-})
+	console.log(`Listening on port: ${PORT}`);
+});
