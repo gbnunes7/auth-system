@@ -15,13 +15,19 @@ const useForm = () => {
 		setConfirmPassword,
 		error,
 		setError,
+		errorLogin,
+		setErrorLogin,
+		emailLogin,
+		setEmailLogin,
+		passwordLogin,
+		setPasswordLogin,
 	} = useContext(FormContext)!;
 
 	const navigate = useNavigate();
 
-	const api_url = 'http://localhost:8080'
+	const api_url = "http://localhost:8080";
 
-	const onHandleSignup = (e: React.FormEvent<HTMLFormElement>) => {
+	const onHandleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (password !== confirmPassword) {
@@ -42,14 +48,41 @@ const useForm = () => {
 			email: email,
 		};
 
-		axios.post(api_url+ "/signup", newUser)
+		try {
+			await axios.post(api_url + "/signup", newUser);
+			setError("Conta registrada com sucesso.");
+		} catch (err) {
+			console.error(err);
+		}
 
-		clearForm();
-		setError("Conta registrada com sucesso.");
 		setTimeout(() => {
+			clearForm();
 			navigate("/");
 			setError("");
 		}, 1000);
+	};
+
+	const onHandleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		const user = {
+			email: emailLogin,
+			password: passwordLogin,
+		};
+
+		try {
+			const res = await axios.post("http://localhost:8080/login", user);
+			localStorage.setItem("token", res.data.token);
+			clearForm()
+		} catch (err: any) {
+			if (err.response) {
+				console.log(err.response.data.message);
+				setErrorLogin(err.response.data.message);
+			} else {
+				console.log("Erro na requisição", err.message);
+				setErrorLogin("Erro na requisição. Tente novamente mais tarde.");
+			}
+		}
 	};
 
 	function clearForm() {
@@ -57,6 +90,8 @@ const useForm = () => {
 		setPassword("");
 		setConfirmPassword("");
 		setEmail("");
+		setEmailLogin("");
+		setPasswordLogin("");
 	}
 
 	return {
@@ -70,6 +105,12 @@ const useForm = () => {
 		setConfirmPassword,
 		onHandleSignup,
 		error,
+		onHandleLogin,
+		emailLogin,
+		setEmailLogin,
+		passwordLogin,
+		setPasswordLogin,
+		errorLogin
 	};
 };
 
