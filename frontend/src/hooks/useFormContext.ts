@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import { FormContext } from "../context/formContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,12 +21,16 @@ const useForm = () => {
 		setEmailLogin,
 		passwordLogin,
 		setPasswordLogin,
+		user,
+		setUser,
+		setIsLogged,
+		isLogged
 	} = useContext(FormContext)!;
 
 	const navigate = useNavigate();
 
-	const api_url = "http://localhost:8080";
-
+	const API_URL = "http://localhost:8080";
+	
 	const onHandleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -41,7 +45,6 @@ const useForm = () => {
 			clearForm();
 			return;
 		}
-
 		const newUser = {
 			nome: nome,
 			password: password,
@@ -49,17 +52,21 @@ const useForm = () => {
 		};
 
 		try {
-			await axios.post(api_url + "/signup", newUser);
+			await axios.post(`${API_URL}/signup`, newUser);
 			setError("Conta registrada com sucesso.");
-		} catch (err) {
-			console.error(err);
+		} catch (err: any) {
+			if (err.response) {
+				setError(err.response.data.message); 
+			} else {
+				setError("Erro na requisição. Tente novamente mais tarde.");
+			}
 		}
 
 		setTimeout(() => {
 			clearForm();
 			navigate("/");
 			setError("");
-		}, 1000);
+		}, 500);
 	};
 
 	const onHandleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,8 +78,11 @@ const useForm = () => {
 		};
 
 		try {
-			const res = await axios.post("http://localhost:8080/login", user);
+			const res = await axios.post(`${API_URL}/login`, user);
 			localStorage.setItem("token", res.data.token);
+			setIsLogged(true)
+			navigate("/home")
+			setUser(res.data.user.nome)
 			clearForm()
 		} catch (err: any) {
 			if (err.response) {
@@ -110,7 +120,12 @@ const useForm = () => {
 		setEmailLogin,
 		passwordLogin,
 		setPasswordLogin,
-		errorLogin
+		errorLogin,
+		user,
+		setUser,
+		navigate,
+		isLogged,
+		setIsLogged
 	};
 };
 
