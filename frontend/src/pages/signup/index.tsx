@@ -38,6 +38,7 @@ const Signup = () => {
 										setNome(event.target.value)
 									}
 									pattern="[A-Za-z\s]+"
+									required
 								/>
 								<Input
 									placeholder="Enter Email"
