@@ -91,7 +91,7 @@ export async function login(req, res) {
 			user: {
 				id: user._id,
 				email: user.email,
-				name: user.name,
+				nome: user.nome,
 			},
 		});
 	} catch (err) {
