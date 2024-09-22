@@ -95,6 +95,13 @@ const useForm = () => {
 		}
 	};
 
+	const onLogout = () => {
+		setUser("")
+		setIsLogged(false)
+		localStorage.removeItem("token")
+		navigate("/")
+	}
+
 	function clearForm() {
 		setNome("");
 		setPassword("");
@@ -125,7 +132,8 @@ const useForm = () => {
 		setUser,
 		navigate,
 		isLogged,
-		setIsLogged
+		setIsLogged,
+		onLogout
 	};
 };
 
