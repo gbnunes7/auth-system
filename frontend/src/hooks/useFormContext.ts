@@ -30,7 +30,7 @@ const useForm = () => {
 	const navigate = useNavigate();
 
 	const API_URL = "http://localhost:8080";
-	
+
 	const onHandleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -80,6 +80,7 @@ const useForm = () => {
 		try {
 			const res = await axios.post(`${API_URL}/login`, user);
 			localStorage.setItem("token", res.data.token);
+			localStorage.setItem("user", res.data.user.nome);
 			setIsLogged(true)
 			navigate("/home")
 			setUser(res.data.user.nome)
@@ -99,6 +100,7 @@ const useForm = () => {
 		setUser("")
 		setIsLogged(false)
 		localStorage.removeItem("token")
+		localStorage.removeItem("user")
 		navigate("/")
 	}
 

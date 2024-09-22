@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface FormContextProps {
 	email: string;
@@ -37,9 +37,19 @@ const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
 	const [error, setError] = useState<string>("");
 	const [errorLogin, setErrorLogin] = useState<string>("");
 	const [emailLogin, setEmailLogin] = useState<string>("");
-	const [passwordLogin, setPasswordLogin] = useState<string>(""); 
+	const [passwordLogin, setPasswordLogin] = useState<string>("");
 	const [user, setUser] = useState<string>("");
-	const [isLogged, setIsLogged] = useState<boolean>(false) 
+	const [isLogged, setIsLogged] = useState<boolean>(false);
+
+	useEffect(() => {
+		const token: string | null = localStorage.getItem("token");
+		const user: string | null = localStorage.getItem("user"); 
+
+		if (token) {
+			setIsLogged(true);
+			setUser(user ?? ""); 
+		}
+	}, []);
 
 	return (
 		<FormContext.Provider
@@ -63,7 +73,7 @@ const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
 				user,
 				setUser,
 				setIsLogged,
-				isLogged
+				isLogged,
 			}}
 		>
 			{children}
