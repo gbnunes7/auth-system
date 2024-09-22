@@ -1,3 +1,4 @@
+import { IoMdArrowBack } from "react-icons/io";
 import Button from "../../components/button";
 import Card from "../../components/card";
 import ContainerForm from "../../components/containerForm";
@@ -18,6 +19,7 @@ const Signup = () => {
 		setConfirmPassword,
 		onHandleSignup,
 		error,
+		navigate
 	} = useForm();
 
 	return (
@@ -25,10 +27,13 @@ const Signup = () => {
 			<Card>
 				<ContainerImg bgUrl="./auth.png" />
 				<ContainerForm>
-					<div className="flex flex-col max-w-[450px] max-h-[557px] items-center gap-2">
+					<button className="relative md:left-56 md:bottom-12 left-40" onClick={() => navigate("/")}>
+						<IoMdArrowBack />
+					</button>
+					<div className="flex flex-col max-w-[450px] max-h-[557px] items-center mx-auto px-4 md:px-0 md:mx-0 gap-2">
 						<Title>Welcome to Auth System</Title>
-						<p className="text-lg">Getting started is easy!</p>
-						<form onSubmit={onHandleSignup}>
+						<form onSubmit={onHandleSignup} className="w-full md:w-[384px]">
+							<p className="text-lg">Getting started is easy!</p>
 							<div className="flex flex-col gap-4 my-8">
 								<Input
 									placeholder="Full Name"
