@@ -44,9 +44,6 @@ const Login = () => {
 									}
 								/>
 								<div className="flex justify-between">
-									<a href="" className="text-red-500 text-sm w-2/6">
-										Recover Password
-									</a>
 									<p className="text-sm">
 										Dont have an account? <span> </span>
 										<Link to={"/signup"} className="text-blue-500">

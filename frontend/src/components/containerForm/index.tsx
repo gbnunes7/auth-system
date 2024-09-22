@@ -1,6 +1,6 @@
 const ContainerForm = ({children} : {children: React.ReactNode}) => {
     return (
-        <div className="w-2/4 flex flex-col justify-center items-center">
+        <div className="md:w-2/4 flex flex-col justify-center items-center">
             {children}
         </div>
     )
