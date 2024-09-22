@@ -8,7 +8,7 @@ import Title from "../../components/title";
 import useForm from "../../hooks/useFormContext";
 
 const Login = () => {
-	const { email, password, setEmail, setPassword } = useForm();
+	const { emailLogin, passwordLogin, setEmailLogin, setPasswordLogin, onHandleLogin, errorLogin } = useForm();
 
 	return (
 		<div className="min-h-screen min-w-screen flex justify-center items-center">
@@ -24,23 +24,23 @@ const Login = () => {
 					<div className="flex flex-col max-w-[400px] max-h-[557px] items-center gap-2">
 						<Title>Welcome Back</Title>
 						<p className="text-lg">Login into your account</p>
-						<form>
+						<form onSubmit={onHandleLogin}>
 							<div className="flex flex-col gap-4 my-8">
 								<Input
 									placeholder="Email"
 									type="text"
-									value={email}
+									value={emailLogin}
 									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-										setEmail(event.target.value)
+										setEmailLogin(event.target.value)
 									}
 								/>
 								<Input
 									placeholder="Password"
 									type="password"
 									autoComplete="off"
-									value={password}
+									value={passwordLogin}
 									onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-										setPassword(event.target.value)
+										setPasswordLogin(event.target.value)
 									}
 								/>
 								<div className="flex justify-between">
@@ -54,6 +54,7 @@ const Login = () => {
 										</Link>
 									</p>
 								</div>
+								<div className="text-[12px] text-red-500">{errorLogin}</div>
 							</div>
 							<Button bgColor="transparent" fontColor="5A5A5A" type="submit">
 								Login
