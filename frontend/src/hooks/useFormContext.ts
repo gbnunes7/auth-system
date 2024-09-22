@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { FormContext } from "../context/formContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const useForm = () => {
 	const {
@@ -18,11 +19,13 @@ const useForm = () => {
 
 	const navigate = useNavigate();
 
+	const api_url = 'http://localhost:8080'
+
 	const onHandleSignup = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (password !== confirmPassword) {
-			setError("Suas senhas não coincidem!");
+			setError("Suas senhas não coincidem.");
 			clearForm();
 			return;
 		}
@@ -33,13 +36,20 @@ const useForm = () => {
 			return;
 		}
 
-		console.log(password, nome, confirmPassword, email);
+		const newUser = {
+			nome: nome,
+			password: password,
+			email: email,
+		};
+
+		axios.post(api_url+ "/signup", newUser)
+
 		clearForm();
 		setError("Conta registrada com sucesso.");
 		setTimeout(() => {
 			navigate("/");
 			setError("");
-		}, 500);
+		}, 1000);
 	};
 
 	function clearForm() {
