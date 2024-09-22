@@ -1,16 +1,13 @@
-import { useEffect } from "react";
-import useForm from "../../hooks/useFormContext"
+import useForm from "../../hooks/useFormContext";
 
-const Private = ({children} : {children: React.ReactNode}) => {
-    const {navigate, isLogged} = useForm()
+const Private = ({ children }: { children: React.ReactNode }) => {
+	const { navigate, isLogged } = useForm();
 
-    useEffect(() => {
-        if (!isLogged) {
-            navigate("/");
-        }
-    }, [isLogged, navigate]);
-    
-    return isLogged? children : null;
-}
+	if (!isLogged) {
+		navigate("/");
+	}
 
-export default Private
+	return isLogged ? <>{children}</> : <>Please signin</>;
+};
+
+export default Private;
