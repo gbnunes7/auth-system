@@ -29,7 +29,7 @@ const useForm = () => {
 
 	const navigate = useNavigate();
 
-	const API_URL = "http://localhost:8080";
+	const API_URL = "https://auth-system-f1m9.onrender.com";
 
 	const onHandleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
