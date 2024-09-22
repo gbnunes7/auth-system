@@ -17,6 +17,10 @@ interface FormContextProps {
 	setPasswordLogin: React.Dispatch<React.SetStateAction<string>>;
 	errorLogin: string;
 	setErrorLogin: React.Dispatch<React.SetStateAction<string>>;
+	user: string;
+	setUser: React.Dispatch<React.SetStateAction<string>>;
+	isLogged: boolean;
+	setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface FormProviderProps {
@@ -34,6 +38,8 @@ const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
 	const [errorLogin, setErrorLogin] = useState<string>("");
 	const [emailLogin, setEmailLogin] = useState<string>("");
 	const [passwordLogin, setPasswordLogin] = useState<string>(""); 
+	const [user, setUser] = useState<string>("");
+	const [isLogged, setIsLogged] = useState<boolean>(false) 
 
 	return (
 		<FormContext.Provider
@@ -53,7 +59,11 @@ const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
 				setPasswordLogin,
 				passwordLogin,
 				errorLogin,
-				setErrorLogin
+				setErrorLogin,
+				user,
+				setUser,
+				setIsLogged,
+				isLogged
 			}}
 		>
 			{children}
